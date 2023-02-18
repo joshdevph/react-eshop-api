@@ -20,7 +20,7 @@ io.on('connection', (socket) => {
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: 'https://eshop-siv0.onrender.com/'
+    origin: "*"
 }))
 app.use(fileUpload({
     useTempFiles: true
