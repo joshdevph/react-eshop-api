@@ -8,7 +8,7 @@ const path = require('path')
 const socketio = require('socket.io')
 const http = require('http')
 const { Socket } = require('dgram')
-
+const cors = require('cors')
 
 const app = express()
 const server = http.createServer(app)
@@ -20,7 +20,9 @@ io.on('connection', (socket) => {
 
 app.use(express.json())
 app.use(cookieParser())
-// app.use(cors())
+app.use(cors({
+    origin: 'https://eshop-siv0.onrender.com/'
+}))
 app.use(fileUpload({
     useTempFiles: true
 }))
