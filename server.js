@@ -8,7 +8,6 @@ const path = require('path')
 const socketio = require('socket.io')
 const http = require('http')
 const { Socket } = require('dgram')
-const cors = require('cors')
 
 const app = express()
 const server = http.createServer(app)
