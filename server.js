@@ -20,7 +20,8 @@ io.on('connection', (socket) => {
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: "*"
+    origin: "http://localhost:3000",
+    credential : true
 }))
 app.use(fileUpload({
     useTempFiles: true
@@ -46,17 +47,6 @@ mongoose.connect(URI, {
     if(err) throw err;
     console.log('Connected to MongoDB')
 })
-
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.join(__dirname, "/client/build")))
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, "client", "build", "index.html"))
-    })
-}else{
-    app.get('/', (req, res) => {
-        res.send('API Running')
-    })
-}
 
 
 
