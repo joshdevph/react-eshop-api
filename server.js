@@ -20,7 +20,7 @@ io.on('connection', (socket) => {
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "https://eshop-siv0.onrender.com",
     credential : true
 }))
 app.use(fileUpload({
