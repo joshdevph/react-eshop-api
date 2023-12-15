@@ -29,11 +29,11 @@ const userCtrl = {
 
             res.cookie('refreshtoken', refreshtoken, {
                 httpOnly: true,
-                path: 'https://react-shop-api.onrender.com/user/refresh_token',
+                path: '/user/refresh_token',
                 maxAge: 7*24*60*60*1000 // 7d
             })
 
-            res.json({accesstoken})
+            res.json({accesstoken, refreshtoken})
 
         } catch (err) {
             return res.status(500).json({msg: err.message})
@@ -55,11 +55,11 @@ const userCtrl = {
 
             res.cookie('refreshtoken', refreshtoken, {
                 httpOnly: true,
-                path: 'https://react-shop-api.onrender.com/user/refresh_token',
+                path: '/user/refresh_token',
                 maxAge: 7*24*60*60*1000 // 7d
             })
 
-            res.json({accesstoken})
+            res.json({accesstoken, refreshtoken})
 
         } catch (err) {
             return res.status(500).json({msg: err.message})
@@ -67,7 +67,7 @@ const userCtrl = {
     },
     logout: async (req, res) =>{
         try {
-            res.clearCookie('refreshtoken', {path: 'https://react-shop-api.onrender.com/user/refresh_token'})
+            res.clearCookie('refreshtoken', {path: '/user/refresh_token'})
             return res.json({msg: "Logged out"})
         } catch (err) {
             return res.status(500).json({msg: err.message})
@@ -75,9 +75,8 @@ const userCtrl = {
     },
     refreshToken: (req, res) =>{
         try {
-            const rf_token = req.cookies.refreshtoken;
-            if(!rf_token) return res.status(400).json({msg: "Please Login or Register"})
-
+            const rf_token = req.query.rf;
+            if(!rf_token) return res.status(400).json({msg: "Please Login or Registerssss"})
             jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) =>{
                 if(err) return res.status(400).json({msg: "Please Login or Register"})
 

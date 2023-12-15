@@ -19,10 +19,13 @@ io.on('connection', (socket) => {
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({
-    origin: "https://eshop-siv0.onrender.com",
-    credential : true
-}))
+
+const corsOptions = {
+    origin: '*',
+    credentials: true,
+    exposedHeaders: ["set-cookie"],
+  };
+app.use(cors(corsOptions))
 app.use(fileUpload({
     useTempFiles: true
 }))
