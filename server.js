@@ -13,10 +13,15 @@ const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./utils/swagger-output.json');
+
 io.on('connection', (socket) => {
     console.log("User is connected");
 })
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.json())
 app.use(cookieParser())
 
